@@ -81,7 +81,6 @@ trait Crypto: Sized {
 	{
 		if let Ok((pair, seed)) = Self::Pair::from_phrase(uri, password) {
 			let public_key = Self::public_from_pair(&pair);
-			
 			match output {
 				OutputType::Json => {
 					let json = json!({
@@ -107,14 +106,14 @@ trait Crypto: Sized {
 					);
 				},
 			}
-		} else if let Ok((pair, seed)) = Self::Pair::from_string_with_seed(uri, password) {
+		} else if let Ok((pair, seed)) = Self::Pair::from_string_with_seed(uri, password) {	
 			let public_key = Self::public_from_pair(&pair);
-
 			match output {
 				OutputType::Json => {
 					let json = json!({
+						"seedPhrase": if let Some(seed) = seed { String::from(Mnemonic::from_entropy(&seed.as_ref(), Language::English).unwrap())} else { "n/a".into() },
 						"secretKeyUri": uri,
-						"secretSeed": if let Some(seed) = seed { format_seed::<Self>(seed) } else { "n/a".into() },
+						// "secretSeed": if let Some(seed) = seed { format_seed::<Self>(seed) } else { "n/a".into() },
 						"publicKey": format_public_key::<Self>(public_key.clone()),
 						"accountId": format_account_id::<Self>(public_key),
 						"ss58Address": Self::ss58_from_pair(&pair),
@@ -123,12 +122,12 @@ trait Crypto: Sized {
 				},
 				OutputType::Text => {
 					println!("Secret Key URI `{}` is account:\n  \
-						Secret seed:      {}\n  \
+						Seed phrase:      {}\n  \
 						Public key (hex): {}\n  \
 						Account ID:       {}\n  \
 						SS58 Address:     {}",
 						uri,
-						if let Some(seed) = seed { format_seed::<Self>(seed) } else { "n/a".into() },
+						if let Some(seed) = seed { String::from(Mnemonic::from_entropy(&seed.as_ref(), Language::English).unwrap())} else { "n/a".into() },
 						format_public_key::<Self>(public_key.clone()),
 						format_account_id::<Self>(public_key),
 						Self::ss58_from_pair(&pair),
@@ -140,7 +139,6 @@ trait Crypto: Sized {
 			<Self::Pair as Pair>::Public::from_string_with_version(uri)
 		{
 			let v = network_override.unwrap_or(v);
-
 			match output {
 				OutputType::Json => {
 					let json = json!({
