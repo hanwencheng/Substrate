@@ -1,0 +1,32 @@
+[target.aarch64-linux-android]
+linker = "/home/hanwen/Library/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang"
+rustflags = [
+    "-C", "link-arg=-L/home/hanwen/Library/android-ndk-r21/platforms/android-29/arch-arm64/usr/lib/",
+    "-C", "link-arg=-L/home/hanwen/Library/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/lib/gcc/aarch64-linux-android/4.9.x/",
+    "-C", "link-arg=-lc++_static", "-C", "link-arg=-lc++abi"
+]
+
+[target.armv7-linux-androideabi]
+linker = "/home/hanwen/Library/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi29-clang"
+rustflags = [
+    "-C", "link-arg=-L/home/hanwen/Library/android-ndk-r21/platforms/android-29/arch-arm/usr/lib/",
+    "-C", "link-arg=-L/home/hanwen/Library/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/",
+    "-C", "link-arg=-lc++_static", "-C", "link-arg=-lc++abi"
+]
+
+[target.i686-linux-android]
+linker = "/home/hanwen/Library/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android29-clang"
+rustflags = [
+    "-C", "link-arg=-L/home/hanwen/Library/android-ndk-r21/platforms/android-29/arch-x86/usr/lib/",
+    "-C", "link-arg=-L/home/hanwen/Library/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/lib/gcc/i686-linux-android/4.9.x/",
+    "-C", "link-arg=-lc++_static", "-C", "link-arg=-lc++abi"
+]
+
+[target.x86_64-linux-android]
+linker = "/home/hanwen/Library/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang"
+rustflags = [
+    "-C", "link-arg=-L/home/hanwen/Library/android-ndk-r21/platforms/android-29/arch-x86_64/usr/lib64",
+    "-C", "link-arg=-L/home/hanwen/Library/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/lib/gcc/x86_64-linux-android/4.9.x/",
+    "-C", "link-arg=-lc++_static", "-C", "link-arg=-lc++abi"
+]
+
